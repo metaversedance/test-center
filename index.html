@@ -1,0 +1,72 @@
+<html>
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no,user-scalable=no,maximum-scale=1">
+    <title>A-Frame Dance Demo</title>
+<!--     <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+ -->    
+    <script src="js/aframe.js"></script>
+
+ <script src="js/aframe-extras.js"></script>
+<script src="https://unpkg.com/aframe-extras.ocean@%5E3.5.x/dist/aframe-extras.ocean.min.js"></script>
+<script src="https://unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script>
+
+
+  </head>
+  <body>
+    <a-scene>
+    <a-assets>
+         <audio id="improvForIsolated" src="audio/mei-ohara_improvisation-for-the-isolated.mp3" preload="false"></audio>
+
+    </a-assets>
+      <!-- Player -->
+      <a-entity camera="userHeight: 1.6; near: .1; far: 10"
+                universal-controls
+                position="0 0 5"
+                >
+      </a-entity>
+
+      <!-- Animation
+           See: http://threejs.org/examples/#webgl_animation_scene
+      -->
+
+
+<!--       <a-entity scale="0.035 0.035 0.035"
+                rotation="0 90 0"
+                json-model="src: url(models/danceTestSyncWithMaterials.json);"
+                animation-mixer="clip: Armacenter4Char00; duration: 66.41"
+                sound="src: #improvForIsolated; autoplay: true; volume: 3"></
+
+                >
+      </a-entity> -->
+
+            <a-entity scale="0.035 0.035 0.035"
+                color="white"
+                rotation="0 90 0"
+                json-model="src: url(models/danceTestSyncWithMaterials.json);"
+                animation-mixer="clip: Armacenter4Char00; duration: 66.41"
+                ></
+
+                >
+
+      </a-entity>
+
+      <!-- Terrain -->
+<!--       <a-grid ></a-grid> -->
+
+      <!-- ocean -->
+      <a-entity id="ocean" ocean="density: 30; width: 50; depth: 50; speed: 1" material="color: #9CE3F9; opacity: 0.75; metalness: 0; roughness: 1" rotation="-90 0 0">
+
+      <!-- particles -->
+<!--       <a-entity id="rain" particle-system="preset: dust; color: #24CAFF; particleCount: 10000; size: .5">
+ -->
+    <a-sky color='black'></a-sky>
+
+      <!-- Lighting -->
+      <a-light type="ambient" color="#bbb"></a-light>
+      <a-light color="#ccc" position="0 30 0" distance="100" intensity="0.4" type="point"></a-light>
+      <a-light color="#ccc" position="3 10 -10" distance="50" intensity="0.4" type="point"></a-light>
+    </a-scene>
+  </body>
+</html>
