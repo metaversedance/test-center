@@ -18,10 +18,12 @@
     <a-scene>
     <a-assets>
          <audio id="improvForIsolated" src="audio/mei-ohara_improvisation-for-the-isolated.mp3" preload="false"></audio>
+         <audio id="thunderSoundEffect" src="audio/thunder.wav" preload="auto"></audio>
+         
 
     </a-assets>
       <!-- Player -->
-      <a-entity camera="userHeight: 1.6; near: .1; far: 10"
+      <a-entity camera="userHeight: 1.6; near: .1; far: 100"
                 universal-controls
                 position="0 0 5"
                 >
@@ -45,7 +47,7 @@
                 color="white"
                 rotation="0 90 0"
                 json-model="src: url(models/danceTestSyncWithMaterials.json);"
-                animation-mixer="clip: Armacenter4Char00; duration: 66.41"
+                animation-mixer="clip: Armacenter4Char00; duration: 70"
                 ></
 
                 >
@@ -56,7 +58,13 @@
 <!--       <a-grid ></a-grid> -->
 
       <!-- ocean -->
-      <a-entity id="ocean" ocean="density: 30; width: 50; depth: 50; speed: 1" material="color: #9CE3F9; opacity: 0.75; metalness: 0; roughness: 1" rotation="-90 0 0">
+      <a-entity 
+      id="ocean" 
+      ocean="density: 30; width: 50; depth: 50; speed: 1" 
+      material="color: #9CE3F9; opacity: 0.75; metalness: 0; roughness: 1" 
+      rotation="-90 0 0"
+      sound='src: #thunderSoundEffect; autoplay: true; volume: 3'
+      ></a-entity>
 
       <!-- particles -->
 <!--       <a-entity id="rain" particle-system="preset: dust; color: #24CAFF; particleCount: 10000; size: .5">
