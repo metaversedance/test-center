@@ -1,0 +1,1 @@
+This is the public repository for "Dance With A Ballerina" for our patrons who support us with < $10/month. I will be adding documentation on the technical and artistic pipeline for this project here and on the patreon project page for current and future itterations of the project. 
