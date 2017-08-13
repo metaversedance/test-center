@@ -17,32 +17,51 @@
 <!--     <script src="js/grab.js"></script>
  -->
 <script type="text/javascript">
- AFRAME.registerComponent("scale-hands",{
+ AFRAME.registerComponent("scale-to-entity-speed",{
+    schema: {
+        entityToTrack: { type: "string"},
+        partToScale: {type: "string"}
+    },
     init: function() {
-        this.objectToFollow = this.el.sceneEl.querySelector("#player");
+        this.objectToFollow = this.el.sceneEl.querySelector(this.data.entityToTrack);
         this.speed = 0;
         this.lastObjPosition = this.el.getAttribute("position");
+        this.getSpeed = function(deltaTime,currentPosition, lastPosition) {
+            var deltaX = lastPosition.x - currentPosition.x ;
+            var deltaY =  lastPosition.y - currentPosition.y ;
+            var deltaZ = lastPosition.z - currentPosition.z;
+            var distanceTravelled =  Math.sqrt( deltaX*deltaX + deltaY*deltaY + deltaZ*deltaZ)
+            var speed = distanceTravelled / deltaTime;
+            return speed;
+
+        }
+        // forearm_L 7 forearm_R 26 dancer.object3D.children[0].geometry
 
     },
     tick: function(time,delta) {
-        if(this.objectToFollow) {
-            var currentObjPosition =  this.objectToFollow.getAttribute("position") || {x: 5, y: 5, z: 5};
+        if(this.objectToFollow && this.el.object3D.children[0]) {
+            var currentObjPosition =  this.objectToFollow.getAttribute("position");
+            var speed = this.getSpeed(delta, currentObjPosition, this.lastObjPosition,)
+            var scalar = speed * 5000;
+            if(scalar < 1) scalar = 1;
+
+            if(this.data.partToScale ==="arm-left") {
+                this.el.object3D.children[0].skeleton.bones[7].scale.set(scalar,scalar,scalar)
+            } else if (this.data.partToScale ==="arm-right") {
+                this.el.object3D.children[0].skeleton.bones[26].scale.set(scalar,scalar,scalar)
+            } else if (this.data.partToScale === "head") {
+                this.el.object3D.children[0].skeleton.bones[4].scale.set(scalar,scalar,scalar)
 
 
-            var deltaX = this.lastObjPosition.x - currentObjPosition.x ;
-            var deltaY =  this.lastObjPosition.y - currentObjPosition.y ;
-            var deltaZ = this.lastObjPosition.z - currentObjPosition.z;
+            }
 
-            var distanceTravelled =  Math.sqrt( deltaX*deltaX + deltaY*deltaY + deltaZ*deltaZ );
-            var speed = distanceTravelled / delta;
-            console.log(speed)
-            this.el.setAttribute("height", speed*50);
 
             this.lastObjPosition = currentObjPosition;
 
         }
 
-    }
+    },
+    multiple: true
 
  })
 
@@ -68,8 +87,8 @@
         <a-entity id="right-hand" hand-controls="right" grab></a-entity>
 
 
-        <a-box scale-hands></a-box>
-        <a-entity scale="0.025 0.025 0.025" color="white" rotation="0 90 0" json-model="src: url(models/danceTestSyncWithMaterials.json);" animation-mixer="clip: Armacenter4Char00; duration: 70" id="dancer">
+<!--         <a-box scale-to-player-movement></a-box>
+ -->        <a-entity scale-to-entity-speed__leftHand="entityToTrack: #left-hand; partToScale:arm-left" scale-to-entity-speed__rightHand="entityToTrack: #right-hand; partToScale:arm-right" scale-to-entity-speed__head="entityToTrack: #player; partToScale:head"  scale="0.025 0.025 0.025" color="white" rotation="0 90 0" json-model="src: url(models/danceTestSyncWithMaterials.json);" animation-mixer="clip: Armacenter4Char00; duration: 70" id="dancer">
         </a-entity>
 
 
