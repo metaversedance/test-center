@@ -40,7 +40,7 @@
     },
     tick: function(time,delta) {
         if(this.objectToFollow && this.el.object3D.children[0]) {
-            var currentObjPosition =  this.objectToFollow.getAttribute("rotation");
+            var currentObjPosition =  this.objectToFollow.getAttribute("position");
             var speed = this.getSpeed(delta, currentObjPosition, this.lastObjPosition,)
             var scalar = speed * 5000;
             if(scalar < 1) scalar = 1;
@@ -87,7 +87,7 @@
 
 
 <!--         <a-box scale-to-player-movement></a-box>
- -->        <a-entity scale-to-entity-speed__leftHand="entityToTrack: #left-hand; partToScale:arm-left" scale-to-entity-speed__rightHand="entityToTrack: #right-hand; partToScale:arm-right" scale-to-entity-speed__head="entityToTrack: #player; partToScale:head"  scale="0.025 0.025 0.025" color="white" rotation="0 90 0" json-model="src: url(models/danceTestSyncWithMaterials.json);" animation-mixer="clip: Armacenter4Char00; duration: 76; loop:pingpong" id="dancer">
+ -->        <a-entity scale-to-entity-speed__leftHand="entityToTrack:#left-hand; partToScale:arm-left" scale-to-entity-speed__rightHand="entityToTrack:#right-hand; partToScale:arm-right" scale-to-entity-speed__head="entityToTrack:#player; partToScale:head"  scale="0.025 0.025 0.025" color="white" rotation="0 90 0" json-model="src: url(models/danceTestSyncWithMaterials.json);" animation-mixer="clip: Armacenter4Char00; duration: 76; loop:pingpong" id="dancer">
         </a-entity>
 
 
